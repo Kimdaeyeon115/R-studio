@@ -1,0 +1,15 @@
+library(readxl)
+library(RColorBrewer)
+matter_datas <- read_excel("./datas/matter.xlsx")
+#color <- c("red","orange","yellow","green","lightblue","blue","violet")
+# color <- rainbow(7)
+#color <- heat.colors(7)
+#color <- terrain.colors(7)
+#color <- topo.colors(7)
+#color <- cm.colors(7)
+color <- brewer.pal(7,name="Accent")
+
+rate <- round(matter_datas$MAX_VAL / sum(matter_datas$MAX_VAL)*100,1)
+labels <- paste(matter_datas$AREA,",",rate,"%")
+
+pie(matter_datas$MAX_VAL, labels, main = "지역별 미세먼지 현황",col=color, clockwise=TRUE)
